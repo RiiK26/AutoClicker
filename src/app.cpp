@@ -147,11 +147,24 @@ static void activate(GtkApplication* app, gpointer user_data)
 
     // Set the window icon (shows in the title bar and taskbar)
     GError* error = NULL;
-    gtk_window_set_icon_from_file(GTK_WINDOW(window), "image/AutoClick.png", &error);
-    if (error != NULL)
-    {
-        g_warning("Could not load window icon: %s", error->message);
-        g_error_free(error);
+    
+    // First try standard name for global install
+    gtk_window_set_icon_name(GTK_WINDOW(window), "autoclicker");
+    
+    // Fallback to absolute path or local path if name fails
+    if (!gtk_window_get_icon_name(GTK_WINDOW(window))) {
+        gtk_window_set_icon_from_file(GTK_WINDOW(window), "/usr/share/pixmaps/autoclicker.png", &error);
+        if (error != NULL)
+        {
+            g_error_free(error);
+            error = NULL;
+            gtk_window_set_icon_from_file(GTK_WINDOW(window), "image/AutoClick.png", &error);
+            if (error != NULL)
+            {
+                g_warning("Could not load window icon: %s", error->message);
+                g_error_free(error);
+            }
+        }
     }
 
     // Label

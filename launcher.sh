@@ -9,22 +9,22 @@ if [ -f "Makefile" ] && [ -d "release" ]; then
     # Compile the GUI natively
     make
     
-    if [ -f "RKKDR/Makefile" ]; then
-        KERNEL_DIR="RKKDR"
-    elif [ -f "../KernelDriver/Makefile" ]; then
-        KERNEL_DIR="../KernelDriver"
-    else
-        echo "Error: RKKDR kernel driver source not found."
-        exit 1
-    fi
-    RELEASE_DIR="release"
-    BINARY="$PWD/$RELEASE_DIR/AutoClicker"
-    
     # Check and load the Kernel Module if it's not already loaded
     if ! lsmod | grep -q RKKDR; then
         echo "Loading kernel module RKKDR..."
+        if [ -f "RKKDR/Makefile" ]; then
+            KERNEL_DIR="RKKDR"
+        elif [ -f "../KernelDriver/Makefile" ]; then
+            KERNEL_DIR="../KernelDriver"
+        else
+            echo "Error: RKKDR kernel driver source not found."
+            exit 1
+        fi
         make -C "$KERNEL_DIR" load
     fi
+    
+    RELEASE_DIR="release"
+    BINARY="$PWD/$RELEASE_DIR/AutoClicker"
 else
     # --- Installed Mode ---
     BINARY="$PWD/AutoClicker"
