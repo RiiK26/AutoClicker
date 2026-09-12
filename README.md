@@ -25,7 +25,7 @@ sudo pacman -S gtk3 pkgconf base-devel
 To get started, clone the repository with its dependencies. Because the `RKKDR` kernel driver is included as a Git Submodule, use the `--recursive` flag:
 
 ```bash
-git clone --recursive https://github.com/ItsMe-RiiK/AutoClicker.git
+git clone --recursive https://github.com/RiiK26/AutoClicker.git
 cd AutoClicker
 ```
 
