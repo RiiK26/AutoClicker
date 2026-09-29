@@ -40,10 +40,13 @@ fi
 echo "Launching AutoClicker..."
 
 # 5. Run only not install
-if [ -w "/sys/module/RKKDR/parameters/enable" ]; then
+PARAM_DIR="/sys/module/RKKDR/parameters"
+if [ -w "$PARAM_DIR/enable" ] && \
+   [ -w "$PARAM_DIR/interval_ms" ] && \
+   [ -w "$PARAM_DIR/hold_click" ]; then
     "$BINARY"
 else
-    echo "⚠️ Udev rules not activated yet. Request access root..."
+    echo "⚠️ RKKDR parameter permissions are not ready. Request access root..."
     xhost +si:localuser:root > /dev/null 2>&1
     pkexec env DISPLAY="$DISPLAY" XAUTHORITY="$XAUTHORITY" "$BINARY" > gui_error.log 2>&1
 fi

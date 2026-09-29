@@ -39,14 +39,14 @@ cat <<'EOF' > "$UDEV_DIR/99-autoclicker.rules"
 KERNEL=="event*", SUBSYSTEM=="input", MODE="0644"
 
 # Allow read/write access to RKKDR module parameters
-ACTION=="add", SUBSYSTEM=="module", KERNEL=="RKKDR", RUN+="/bin/chmod a+rw /sys/module/RKKDR/parameters/enable /sys/module/RKKDR/parameters/interval_ms"
+ACTION=="add", SUBSYSTEM=="module", KERNEL=="RKKDR", RUN+="/bin/chmod a+rw /sys/module/RKKDR/parameters/enable /sys/module/RKKDR/parameters/interval_ms /sys/module/RKKDR/parameters/hold_click"
 EOF
 udevadm control --reload-rules
 udevadm trigger
 
 # If the module is already loaded, apply permissions immediately
 if [ -d "/sys/module/RKKDR/parameters" ]; then
-    chmod a+rw /sys/module/RKKDR/parameters/enable /sys/module/RKKDR/parameters/interval_ms 2>/dev/null || true
+    chmod a+rw /sys/module/RKKDR/parameters/enable /sys/module/RKKDR/parameters/interval_ms /sys/module/RKKDR/parameters/hold_click 2>/dev/null || true
 fi
 chmod a+r /dev/input/event* 2>/dev/null || true
 

@@ -162,7 +162,7 @@ static void activate(GtkApplication* app, gpointer user_data)
   GtkWidget* label = gtk_label_new("Toggle with hotkey: ` (Backtick)");
   gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
 
-  GtkWidget*  hold_click_check = gtk_check_button_new_with_label("Hold mouse click");
+  GtkWidget*  hold_click_check = gtk_check_button_new_with_label("Hold mouse click mode");
   std::string hold_click       = read_sysfs(HOLD_FILE);
   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(hold_click_check), hold_click == "Y" || hold_click == "1");
   g_signal_connect(hold_click_check, "toggled", G_CALLBACK(on_hold_click_toggle), NULL);
