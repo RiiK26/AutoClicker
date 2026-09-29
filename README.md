@@ -3,22 +3,18 @@
 ![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-Linux-green.svg)
 
-A blazing fast, hardware-level AutoClicker interface built in native C++ and GTK3. 
-
-
----
+A blazing fast, hardware-level AutoClicker interface built in native C++ and GTK3.
 
 ## ⚠️ Requirements
 
 This project is a userspace GUI. It **requires** the `RKKDR` (Kernel Driver) module to be loaded into your Linux kernel to function. The GUI communicates with the custom `/dev/rkkdr_mouse` hardware interface exposed by that driver.
 
-### Dependencies (Arch Linux)
+### Dependencies
 You will need GTK3 and standard C++ compilation tools:
 ```bash
 sudo pacman -S gtk3 pkgconf base-devel
 ```
 
----
 
 ## Installation & Setup
 
@@ -31,11 +27,10 @@ cd AutoClicker
 
 *(If you already cloned it without the flag, run `git submodule update --init --recursive` inside the folder).*
 
----
 
 ## Desktop Application Installation
 
-If you want to install AutoClicker properly into your system's application menu (like a normal desktop app), you can use the provided install scripts. 
+If you want to install AutoClicker properly into your system's application menu (like a normal desktop app), you can use the provided install scripts.
 
 1. Ensure the `RKKDR` kernel module is loaded (you can run `./launcher.sh` once to do this automatically).
 2. Run the installation script:
@@ -65,15 +60,21 @@ Simply run the included launcher script from your terminal or by double-clicking
 ```
 
 ### The Manual Way
-1. Compile the GUI natively:
+1. Compile the GUI:
    ```bash
    make
    ```
 2. Ensure the `RKKDR` driver is compiled and loaded into your kernel (via the `RKKDR` directory).
 3. Run the GUI manually (Requires `pkexec` or `sudo` to write to the kernel `/sys/` node and device files):
    ```bash
-   pkexec env DISPLAY="$DISPLAY" XAUTHORITY="$XAUTHORITY" ./release/AutoClicker
+   pkexec env DISPLAY="$DISPLAY" XAUTHORITY="$XAUTHORITY" ./build/release/AutoClicker
    ```
+
+### Click Modes
+
+The backtick key (`) toggles auto-clicking on and off. Enable **Hold mouse click**
+in the application to keep the left mouse button held down while auto-clicking is
+enabled instead of repeatedly clicking.
 
 ### LICENSE
 This project is licensed under the GPL-3.0 [LICENSE](License)
