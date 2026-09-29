@@ -28,7 +28,7 @@ UDEV_DIR="/etc/udev/rules.d"
 
 # 4. Copy the necessary files
 echo "Copying files..."
-cp release/AutoClicker "$INSTALL_DIR/autoclicker"
+cp build/release/AutoClicker "$INSTALL_DIR/autoclicker"
 cp image/AutoClick.png "$PIXMAPS_DIR/autoclicker.png"
 
 # 4.5 Configure udev rules so the app can run without root!
